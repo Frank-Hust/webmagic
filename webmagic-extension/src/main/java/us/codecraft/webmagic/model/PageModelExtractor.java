@@ -208,7 +208,9 @@ class PageModelExtractor {
             TargetUrl targetUrl = (TargetUrl) annotation;
             String[] value = targetUrl.value();
             for (String s : value) {
-                targetUrlPatterns.add(Pattern.compile("(" + s.replace(".", "\\.").replace("*", "[^\"'#]*") + ")"));
+                //cancel the author's custom optimization of regex, just use the common regex to match targetUrl,so you can use IDE regex utils to verify the regex that you write
+                targetUrlPatterns.add(Pattern.compile("(" + s+ ")"));
+                //targetUrlPatterns.add(Pattern.compile("(" + s.replace(".", "\\.").replace("*", "[^\"'#]*") + ")"));
             }
             if (!targetUrl.sourceRegion().equals("")) {
                 targetUrlRegionSelector = new XpathSelector(targetUrl.sourceRegion());
